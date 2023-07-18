@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/frontend" method="post">
+        <label for="name">TEST FORM</label> <br>
+        <input type="text" id="name" name="fname" >  <br>
+        <button type="submit" id="submit">Submit</button>
+    </form>
+    <script>
+        let submitButton = document.getElementById('submit');
+        let body = document.body;
+        submitButton.addEventListener.addEventListener('click',async()=>{
+            document.body.innerHTML='red'
+            let newElem = document.createElement('h5');
+            let response = await fetch('/frontend');
+            let data = await response.json();
+            
+            newElem.textContent= data;
+            body.appendChild(newElem);
+
+        })
+    </script>
+</body>
+</html>

@@ -1,3 +1,3 @@
-const logEvents =require('./eventLog');
+const user = {name:"ANTONY"};
 
-logEvents('hello');
+console.log(`  ${user}`)
