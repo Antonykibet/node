@@ -2,6 +2,10 @@ const express = require('express');
 const app =express();
 const users = require('./data')
 
+app.use(express.static('./express'));
+app.use(express.urlencoded({extended:false}));
+app.use(express.json());
+
 const {ordinaryUsers, admin} = users;
 
 // app.get('*', (req,res)=>{
@@ -30,9 +34,6 @@ const {ordinaryUsers, admin} = users;
 //     res.send(sortedUsers)
 // })
 
-app.use(express.static('./express'));
-app.use(express.urlencoded({extended:false}));
-app.use(express.json());
 
 app.post('/action',(req,res)=>{
     const {fname} = req.body;
@@ -52,6 +53,23 @@ app.post('/frontend',(req, res)=>{
     console.log(req.body);
 })
 
+app.put('/change/:id',(req,res)=>{
+    const {id} = req.params;
+    const {name} = req.query;
+    
+    if(name!=='antony'){
+        res.status(404).send('Haiwezi bro')
+        return;
+    }
+    if(name=='antony'){
+        const person = admin.find((person)=>person.id==Number(id));
+        person.name=req.body.name;
+        res.status(200).json(admin);
+        console.log(admin);
+    return;
+    }
+ 
+})
 
 
 app.listen(3500, ()=>console.log('Server is listening at port 3500...'))
