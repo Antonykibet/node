@@ -32,17 +32,25 @@ const {ordinaryUsers, admin} = users;
 
 app.use(express.static('./express'));
 app.use(express.urlencoded({extended:false}));
+app.use(express.json());
 
 app.post('/action',(req,res)=>{
     const {fname} = req.body;
-    fname=='Antony'? res.status(200).send('accept'): res.status(404 ).send('Decline');
+    fname=='Antony'? res.status(200).send(`Accept:${fname}`): res.status(404 ).send('Decline');
+    // res.send(fname)
     console.log(fname);
 })
 
-app.post('/frontend',(req, res)=>{
-    res.end('Imefika!!');
+app.get('/frontend/:jina',(req, res)=>{
+    res.json(admin);
+    console.log(req.params)
 })
 
+app.post('/frontend',(req, res)=>{
+    let body =req.body;
+    res.json(body);
+    console.log(req.body);
+})
 
 
 

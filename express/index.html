@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="/frontend" method="post">
+    <form action="/action" method="post">
         <label for="name">TEST FORM</label> <br>
         <input type="text" id="name" name="fname" >  <br>
         <button type="submit" id="submit">Submit</button>
@@ -15,8 +15,7 @@
     <script>
         let submitButton = document.getElementById('submit');
         let body = document.body;
-        submitButton.addEventListener.addEventListener('click',async()=>{
-            document.body.innerHTML='red'
+        submitButton.addEventListener('click',async()=>{
             let newElem = document.createElement('h5');
             let response = await fetch('/frontend');
             let data = await response.json();
