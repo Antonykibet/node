@@ -1,12 +1,22 @@
 const {MongoClient,ObjectId} = require('mongodb')
-const express = require('express')
-
+const express = require('express');
+const { constant, result } = require('lodash');
 const app = express();
 
-console.log()
 const uri = `mongodb+srv://antonykibet059:123Acosta@cluster0.eoos6vz.mongodb.net/Ecommerce?retryWrites=true&w=majority`
-
 const client = new MongoClient(uri);
+const PORT = 3500;
+
+app.get('/users',async(req,res)=>{
+    const db = await client.db('Ecommerce')
+    const Users = await db.collection('Users').find().toArray()
+    res.send(Users)
+})
+
+app.listen(PORT,async()=>{
+    await  client.connect()
+})
+
 
 
 async function dbInit(){
@@ -23,7 +33,7 @@ async function dbInit(){
     }
 }
 
-dbInit()
+//dbInit()
 
 // async function connect(){
 //     try{
