@@ -56,18 +56,19 @@ app.post('/frontend',(req, res)=>{
 app.put('/change/:id',(req,res)=>{
     const {id} = req.params;
     const {name} = req.query;
+
     
-    if(name!=='antony'){
+
+    let failed=()=>{
         res.status(404).send('Haiwezi bro')
-        return;
     }
-    if(name=='antony'){
+    let succesfull=()=>{
         const person = admin.find((person)=>person.id==Number(id));
         person.name=req.body.name;
         res.status(200).json(admin);
         console.log(admin);
-    return;
     }
+    (name=='antony')?succesfull():failed();
  
 })
 
